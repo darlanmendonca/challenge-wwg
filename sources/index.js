@@ -24,9 +24,7 @@ mongoose.Promise = Promise
 
 mongoose
   .connect(`mongodb://localhost/${database}`, {useMongoClient: false})
-  .then(() => app.listen(port, () => console.info(`localhost:${port}`)))
+  .then(() => app.listen(port))
   .catch(() => console.error('error on connect db'))
-
-// app.listen(port)
 
 module.exports = app

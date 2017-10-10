@@ -2,7 +2,7 @@ const Users = require('./users.model.js')
 
 module.exports = {
   list,
-  // signup,
+  signup,
 }
 
 function list(req, res) {
@@ -15,13 +15,23 @@ function list(req, res) {
     })
 }
 
-// function signup(req, res) {
-//   const user = Users(req.body)
+function signup(req, res) {
+  const user = Users(req.body)
 
-//   user
-//     .save()
-//     .then(() => res.status(201).json({message: 'created'}))
-//     .catch((err) => {
-//       res.status(400).json({message: err.message})
-//     })
-// }
+  user
+    .save()
+    .then(created)
+    .catch(badRequest)
+
+  function created() {
+    res
+      .status(201)
+      .json({message: 'created'})
+  }
+
+  function badRequest(err) {
+    res
+      .status(400)
+      .json({message: err.message})
+  }
+}

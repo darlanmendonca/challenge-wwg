@@ -7,6 +7,7 @@ const router = Router()
 router
   .route('/users')
   .get(users.list)
+  .post(users.signup)
 
 router
   .route('/restaurants')
