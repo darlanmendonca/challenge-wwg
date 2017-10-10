@@ -1,5 +1,5 @@
 const faker = require('faker')
-let restaurants = [...Array(20).keys()]
+let places = [...Array(20).keys()]
   .map(() => faker.name.firstName())
 
 const categories = [
@@ -12,7 +12,7 @@ const categories = [
 ]
 
 const mock = Array
-  .from(new Set(restaurants))
+  .from(new Set(places))
   .map(name => {
     const randomIndex = parseInt(Math.random() * categories.length)
     const category = categories[randomIndex]

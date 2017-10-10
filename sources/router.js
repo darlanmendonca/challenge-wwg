@@ -1,6 +1,6 @@
 const {Router} = require('express')
 const users = require('./users/users.controller.js')
-const restaurants = require('./restaurants/restaurants.controller.js')
+const places = require('./places/places.controller.js')
 
 const router = Router()
 
@@ -14,7 +14,7 @@ router
   .post(users.authenticate)
 
 router
-  .route('/restaurants')
-  .get(restaurants.list)
+  .route('/places')
+  .get(places.list)
 
 module.exports = router

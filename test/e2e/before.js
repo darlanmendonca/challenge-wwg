@@ -4,7 +4,7 @@ require('chai')
   .use(require('chai-things'))
 
 before(mockUser)
-before(mockRestaurants)
+before(mockPlaces)
 
 function mockUser() {
   const Users = require('../../sources/users/users.model.js')
@@ -20,18 +20,18 @@ function mockUser() {
   }
 }
 
-function mockRestaurants() {
-  const Restaurants = require('../../sources/restaurants/restaurants.model.js')
-  const mocks = require('../../sources/restaurants/restaurants.mock.js')
+function mockPlaces() {
+  const Places = require('../../sources/places/places.model.js')
+  const mocks = require('../../sources/places/places.mock.js')
 
   mocks.forEach(mock => {
-    const restaurant = new Restaurants(mock)
-    restaurant
+    const place = new Places(mock)
+    place
       .save()
       .then(setMockId)
 
-    function setMockId(restaurant) {
-      mock.id = restaurant._id
+    function setMockId(place) {
+      mock.id = place._id
     }
   })
 }

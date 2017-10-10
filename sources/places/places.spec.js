@@ -1,11 +1,11 @@
 const {request, expect} = require('chai')
 const app = require('../index.js')
 
-describe('Restaurants', () => {
-  describe('.list - GET /restaurants', () => {
+describe('Places', () => {
+  describe('.list - GET /places', () => {
     it('should have a status 200', (done) => {
       request(app)
-        .get('/restaurants')
+        .get('/places')
         .end((err, res) => {
           expect(res).to.be.json
           done()
@@ -14,7 +14,7 @@ describe('Restaurants', () => {
 
     it('should be a json', (done) => {
       request(app)
-        .get('/restaurants')
+        .get('/places')
         .end((err, res) => {
           expect(res).to.be.json
           done()
@@ -23,7 +23,7 @@ describe('Restaurants', () => {
 
     it('should have a body json', (done) => {
       request(app)
-        .get('/restaurants')
+        .get('/places')
         .end((err, res) => {
           expect(res.body).to.be.an('array')
           done()
@@ -32,7 +32,7 @@ describe('Restaurants', () => {
 
     it('should have keys name, and lastname', (done) => {
       request(app)
-        .get('/restaurants')
+        .get('/places')
         .end((err, res) => {
           expect(res.body).all.have.property('name')
           expect(res.body).all.have.property('category')
@@ -43,7 +43,7 @@ describe('Restaurants', () => {
 
     it('should filter fields', (done) => {
       request(app)
-        .get('/restaurants')
+        .get('/places')
         .set('filters', 'name')
         .end((err, res) => {
           expect(res.body).all.have.property('name')

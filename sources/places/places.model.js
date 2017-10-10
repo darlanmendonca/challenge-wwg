@@ -9,5 +9,5 @@ const schema = new mongoose.Schema({
 
 schema.plugin(privates)
 
-module.exports = mongoose.model('restaurants', schema)
+module.exports = mongoose.model('places', schema)
 
