@@ -5,6 +5,7 @@ const gzip = require('compression')
 const methodOverride = require('method-override')
 const multer = require('multer')
 const {urlencoded, json} = require('body-parser')
+const filter = require('./filter/filter.helper.js')
 const router = require('./router.js')
 const {port} = require('./config.js')
 
@@ -15,6 +16,7 @@ app
   .use(multer().array())
   .use(urlencoded({extended: true}))
   .use(json())
+  .use(filter)
   .use(router)
 
 app.listen(port)

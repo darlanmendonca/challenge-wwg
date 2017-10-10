@@ -3,5 +3,9 @@ module.exports = {
 }
 
 function list(req, res) {
-  res.json([{name: 'darlan'}, {name: 'clara'}])
+  const data = [
+    {name: 'darlan', lastname: 'mendonça'},
+    {name: 'clara', lastname: 'mendonça'},
+  ]
+  res.json(data)
 }
