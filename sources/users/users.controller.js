@@ -3,6 +3,7 @@ const Users = require('./users.model.js')
 module.exports = {
   list,
   signup,
+  authenticate,
 }
 
 function list(req, res) {
@@ -33,5 +34,30 @@ function signup(req, res) {
     res
       .status(400)
       .json({message: err.message})
+  }
+}
+
+function authenticate(req, res) {
+  const encode = require('../encode/encode.helper.js')
+  const jwt = require('jsonwebtoken')
+  const {secret, token: tokenSets} = require('../config.js')
+
+  const email = req.body.email
+  const password = encode.md5(req.body.password)
+
+  Users
+    .findOne({email, password})
+    .then(generateToken)
+
+  function generateToken(user) {
+    if (!user) {
+      return res
+        .status(401)
+        .json({message: 'invalid credentials'})
+    }
+
+    const {id} = user
+    const token = jwt.sign({id, email}, secret, tokenSets)
+    res.json({id, token})
   }
 }

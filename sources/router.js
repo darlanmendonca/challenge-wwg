@@ -10,6 +10,10 @@ router
   .post(users.signup)
 
 router
+  .route('/users/authenticate')
+  .post(users.authenticate)
+
+router
   .route('/restaurants')
   .get(restaurants.list)
 
