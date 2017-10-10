@@ -1,6 +1,8 @@
 const {Router} = require('express')
 const users = require('./users/users.controller.js')
 const places = require('./places/places.controller.js')
+const validate = require('./validate/validate.controller.js')
+const votes = require('./votes/votes.controller.js')
 
 const router = Router()
 
@@ -16,5 +18,11 @@ router
 router
   .route('/places')
   .get(places.list)
+
+router.use(validate.token)
+
+router
+  .route('/users/vote')
+  .post(votes.create)
 
 module.exports = router

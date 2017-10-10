@@ -14,9 +14,22 @@ function mockUser() {
   return user
     .save()
     .then(setUserId)
+    .then(setToken)
 
   function setUserId(user) {
     mock.id = user._id
+    return user
+  }
+
+  function setToken(user) {
+    const jwt = require('jsonwebtoken')
+    const {secret, token: tokenSets} = require('../../sources/config.js')
+
+    const {id, email} = user
+    const token = jwt.sign({id, email}, secret, tokenSets)
+
+    mock.token = token
+    mock.invalidToken = token.replace(/^.{2}/, '')
   }
 }
 

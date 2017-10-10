@@ -56,7 +56,7 @@ function authenticate(req, res) {
         .json({message: 'invalid credentials'})
     }
 
-    const {id} = user
+    const id = user._id.toString()
     const token = jwt.sign({id, email}, secret, tokenSets)
     res.json({id, token})
   }

@@ -1,16 +1,8 @@
-// const jwt = require('jsonwebtoken')
-// const {secret, token: tokenSets} = require('../config.js')
 const faker = require('faker')
 
-const mock = {
+module.exports = {
   email: 'iknownothing@snow.com',
   password: 'ygridiloveyou',
+
+  invalidPassword: faker.internet.password(),
 }
-
-// const {id, email} = mock
-// const token = jwt.sign({id, email}, secret, tokenSets)
-// mock.token = token
-// mock.invalidToken = token.replace(/^.{2}/, '')
-mock.invalidPassword = faker.internet.password()
-
-module.exports = mock
