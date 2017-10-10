@@ -1,7 +1,3 @@
-require('chai')
-  .use(require('chai-http'))
-  .use(require('chai-things'))
-
 const {request, expect} = require('chai')
 const app = require('../index.js')
 

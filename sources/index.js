@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -7,7 +8,7 @@ const multer = require('multer')
 const {urlencoded, json} = require('body-parser')
 const filter = require('./filter/filter.helper.js')
 const router = require('./router.js')
-const {port} = require('./config.js')
+const {port, database} = require('./config.js')
 
 app
   .use(cors())
@@ -19,6 +20,13 @@ app
   .use(filter)
   .use(router)
 
-app.listen(port)
+mongoose.Promise = Promise
+
+mongoose
+  .connect(`mongodb://localhost/${database}`, {useMongoClient: false})
+  .then(() => app.listen(port, () => console.info(`localhost:${port}`)))
+  .catch(() => console.error('error on connect db'))
+
+// app.listen(port)
 
 module.exports = app

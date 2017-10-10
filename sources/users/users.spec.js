@@ -1,7 +1,3 @@
-require('chai')
-  .use(require('chai-http'))
-  .use(require('chai-things'))
-
 const {request, expect} = require('chai')
 const app = require('../index.js')
 
@@ -33,23 +29,13 @@ describe('.list - GET /users', () => {
       })
   })
 
-  it('should have keys name, and lastname', (done) => {
+  it('should have keys _id, and email', (done) => {
     request(app)
       .get('/users')
       .end((err, res) => {
-        expect(res.body).all.have.property('name')
-        expect(res.body).all.have.property('lastname')
-        done()
-      })
-  })
-
-  it('should filter fields', (done) => {
-    request(app)
-      .get('/users')
-      .set('filters', 'name')
-      .end((err, res) => {
-        expect(res.body).all.have.property('name')
-        expect(res.body).all.not.have.property('lastname')
+        expect(res.body).all.have.property('_id')
+        expect(res.body).all.have.property('email')
+        expect(res.body).all.not.have.property('password')
         done()
       })
   })
