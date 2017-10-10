@@ -25,4 +25,8 @@ router
   .route('/places/vote')
   .post(votes.create)
 
+router
+  .route('/places/mostvoted')
+  .get(votes.getMostVoted)
+
 module.exports = router

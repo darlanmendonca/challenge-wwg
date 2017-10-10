@@ -1,9 +1,9 @@
 const {request, expect} = require('chai')
 const app = require('../index.js')
+const user = require('../users/users.mock.js')
 
 describe('Votes', () => {
   describe('.vote - POST /places/vote', () => {
-    const user = require('../users/users.mock.js')
     const places = require('../places/places.mock.js')
 
     it('required token', (done) => {
@@ -85,6 +85,21 @@ describe('Votes', () => {
           expect(res).to.be.json
           expect(res).to.have.status(200)
           expect(res.body).to.have.property('message', 'updated')
+          done()
+        })
+    })
+  })
+
+  describe('.getMostVoted - GET /places/mostvoted', () => {
+    it('should return place most voted', (done) => {
+      request(app)
+        .get('/places/mostvoted')
+        .set('authorization', user.token)
+        .end((err, res) => {
+          expect(res).to.be.json
+          expect(res).to.have.status(200)
+          expect(res.body).all.have.property('name')
+          expect(res.body).all.have.property('category')
           done()
         })
     })

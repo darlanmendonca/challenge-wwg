@@ -38,5 +38,4 @@ function list(req, res) {
             : res.status(204).json(places)
         })
     })
-
 }
