@@ -35,6 +35,7 @@ describe('.list - GET /restaurants', () => {
       .end((err, res) => {
         expect(res.body).all.have.property('name')
         expect(res.body).all.have.property('category')
+        expect(res.body).all.not.have.property('__v')
         done()
       })
   })

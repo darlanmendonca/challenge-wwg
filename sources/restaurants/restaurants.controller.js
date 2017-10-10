@@ -1,9 +1,15 @@
-const mock = require('./restaurants.mock.js')
+const Restaurants = require('./restaurants.model.js')
 
 module.exports = {
   list,
 }
 
 function list(req, res) {
-  res.json(mock)
+  Restaurants
+    .find()
+    .then(restaurants => {
+      restaurants.length
+        ? res.json(restaurants)
+        : res.status(204).json(restaurants)
+    })
 }

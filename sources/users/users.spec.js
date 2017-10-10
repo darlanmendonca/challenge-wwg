@@ -36,6 +36,7 @@ describe('.list - GET /users', () => {
         expect(res.body).all.have.property('_id')
         expect(res.body).all.have.property('email')
         expect(res.body).all.not.have.property('password')
+        expect(res.body).all.not.have.property('__v')
         done()
       })
   })
