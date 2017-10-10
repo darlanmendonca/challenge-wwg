@@ -22,7 +22,7 @@ router
 router.use(validate.token)
 
 router
-  .route('/users/vote')
+  .route('/places/vote')
   .post(votes.create)
 
 module.exports = router

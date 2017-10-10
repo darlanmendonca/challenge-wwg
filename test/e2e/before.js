@@ -5,6 +5,7 @@ require('chai')
 
 before(mockUser)
 before(mockPlaces)
+before(mockVotes)
 
 function mockUser() {
   const Users = require('../../sources/users/users.model.js')
@@ -37,14 +38,33 @@ function mockPlaces() {
   const Places = require('../../sources/places/places.model.js')
   const mocks = require('../../sources/places/places.mock.js')
 
-  mocks.forEach(mock => {
+  mocks.forEach((mock, index) => {
     const place = new Places(mock)
+
     place
       .save()
       .then(setMockId)
 
     function setMockId(place) {
-      mock.id = place._id
+      mocks[index].id = place._id.toString()
     }
   })
+}
+
+function mockVotes() {
+  const Votes = require('../../sources/votes/votes.model.js')
+  const user = require('../../sources/users/users.mock.js')
+  const today = new Date()
+  const yesterday = today.setDate(today.getDate() - 1)
+
+  const vote = new Votes({
+    user: user.id,
+    date: yesterday,
+    places: [
+      '58777769d65deb5fb26a3cc8',
+      '58777769d65deb5fb26a3cc9',
+    ],
+  })
+
+  return vote.save()
 }

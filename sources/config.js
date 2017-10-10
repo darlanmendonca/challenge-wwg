@@ -10,7 +10,7 @@ const configs = {
   },
   development: {
     port: process.env.PORT || 4000,
-    database: 'webservice',
+    database: 'wwg',
     secret: 'kljj4hhsdih.8j32h',
     token: {
       expiresIn: '24h',
@@ -18,7 +18,7 @@ const configs = {
   },
   production: {
     port: 4000,
-    database: 'webservice',
+    database: 'wwg',
     secret: 'tkta0kjxjkur3sor',
     token: {
       expiresIn: '24h',
