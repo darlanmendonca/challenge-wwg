@@ -24,7 +24,31 @@ mongoose.Promise = Promise
 
 mongoose
   .connect(`mongodb://localhost/${database}`, {useMongoClient: false})
+  .then(migration)
   .then(() => app.listen(port))
-  .catch(() => console.error('error on connect db'))
+  .catch((err) => console.error(err))//'error on connect db'))
+
+function migration() {
+  // temporary migration, is better use something more mature, like mongodb-migrations
+  const isDevelopment = app.get('env') === 'development'
+  const Places = require('./places/places.model.js')
+
+  if (isDevelopment) {
+    return Places
+      .find({})
+      .then(mockPlaces)
+  }
+
+  function mockPlaces(places) {
+    const mocks = require('./places/places.mock.js')
+    if (!places.length) {
+      mocks.forEach((mock, index) => {
+        const place = new Places(mock)
+
+        place.save()
+      })
+    }
+  }
+}
 
 module.exports = app
