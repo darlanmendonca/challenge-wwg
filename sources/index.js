@@ -42,7 +42,7 @@ function migration() {
   function mockPlaces(places) {
     const mocks = require('./places/places.mock.js')
     if (!places.length) {
-      mocks.forEach((mock, index) => {
+      mocks.forEach(mock => {
         const place = new Places(mock)
 
         place.save()
