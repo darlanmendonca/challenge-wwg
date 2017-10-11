@@ -24,11 +24,13 @@ function list(req, res) {
     .find({date: week})
     .then(votes => {
       const {ObjectId} = require('mongodb')
-      votes = votes
-        .map(item => item.places)
-        .reduce((a, b) => a.concat(b))
-      votes = Array.from(new Set(votes))
-        .map(id => ObjectId(id))
+      if (votes.length) {
+        votes = votes
+          .map(item => item.places)
+          .reduce((a, b) => a.concat(b))
+        votes = Array.from(new Set(votes))
+          .map(id => ObjectId(id))
+      }
 
       Places
         .find({_id: {$nin: votes}})
@@ -37,5 +39,9 @@ function list(req, res) {
             ? res.json(places)
             : res.status(204).json(places)
         })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(400).json({message: 'error'})
     })
 }

@@ -30,7 +30,6 @@ mongoose
 
 function migration() {
   // temporary migration, is better use something more mature, like mongodb-migrations
-  console.log('>>', app.get('env'))
   const isDevelopment = app.get('env') === 'development'
   const Places = require('./places/places.model.js')
 
